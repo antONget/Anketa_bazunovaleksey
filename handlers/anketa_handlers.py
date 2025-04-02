@@ -41,22 +41,22 @@ async def process_start_anketa(message: Message, state: FSMContext, bot: Bot) ->
         await state.update_data(answer=[])
         if question['list_buttons']:
 
-            await message.answer(text=f"1. {question['message']}",
+            await message.answer(text=f"{question['message']}",
                                  reply_markup=keyboard_anketa(list_answer=question['list_buttons'],
                                                               count_question=1))
         else:
-            await message.answer(text=f"1. {question['message']}")
+            await message.answer(text=f"{question['message']}")
             await state.set_state(Question.question)
     else:
         question = dict_questions[2]
         await state.update_data(answer=[f"-1_{user_info.organization}"])
         if question['list_buttons']:
 
-            await message.answer(text=f"2. {question['message']}",
+            await message.answer(text=f"{question['message']}",
                                  reply_markup=keyboard_anketa(list_answer=question['list_buttons'],
                                                               count_question=2))
         else:
-            await message.answer(text=f"2. {question['message']}")
+            await message.answer(text=f"{question['message']}")
             await state.set_state(Question.question)
 
 
@@ -89,6 +89,8 @@ async def get_answer_question(message: Message, state: FSMContext, bot: Bot) -> 
                     f'{answer}\n\n'
         await send_text_admins(bot=bot, text=text)
         append_order(order=google_sheets_order)
+        await state.clear()
+        await message.answer(text='Спасибо за уделенное время!')
         return
 
     await state.update_data(answer=answer_list)
@@ -96,20 +98,20 @@ async def get_answer_question(message: Message, state: FSMContext, bot: Bot) -> 
     questions = dict_questions[count_question]
     if questions['list_buttons']:
         try:
-            await message.edit_text(text=f"{count_question}. {questions['message']}",
+            await message.edit_text(text=f"{questions['message']}",
                                     reply_markup=keyboard_anketa(list_answer=questions['list_buttons'],
                                                                  count_question=count_question))
         except:
-            await message.answer(text=f"{count_question}. {questions['message']}",
+            await message.answer(text=f"{questions['message']}",
                                  reply_markup=keyboard_anketa(list_answer=questions['list_buttons'],
                                                               count_question=count_question))
         await state.set_state(state=None)
     else:
         try:
-            await message.edit_text(text=f"{count_question}. {questions['message']}",
+            await message.edit_text(text=f"{questions['message']}",
                                     reply_markup=None)
         except:
-            await message.answer(text=f"{count_question}. {questions['message']}",
+            await message.answer(text=f"{questions['message']}",
                                  reply_markup=None)
         await state.set_state(Question.question)
 
@@ -148,24 +150,26 @@ async def process_select_answer(callback: CallbackQuery, state: FSMContext, bot:
                     f'{answer}\n\n'
         await send_text_admins(bot=bot, text=text)
         append_order(order=google_sheets_order)
+        await state.clear()
+        await callback.message.answer(text='Спасибо за уделенное время!')
     else:
         await state.update_data(answer=answer_list)
         questions = dict_questions[count_question]
         if questions['list_buttons']:
             try:
-                await callback.message.edit_text(text=f"{count_question}. {questions['message']}",
+                await callback.message.edit_text(text=f"{questions['message']}",
                                                  reply_markup=keyboard_anketa(list_answer=questions['list_buttons'],
                                                                               count_question=count_question))
             except:
-                await callback.message.answer(text=f"{count_question}. {questions['message']}",
+                await callback.message.answer(text=f"{questions['message']}",
                                               reply_markup=keyboard_anketa(list_answer=questions['list_buttons'],
                                                                            count_question=count_question))
         else:
             try:
-                await callback.message.edit_text(text=f"{count_question}. {questions['message']}",
+                await callback.message.edit_text(text=f"{questions['message']}",
                                                  reply_markup=None)
             except:
-                await callback.message.answer(text=f"{count_question}. {questions['message']}",
+                await callback.message.answer(text=f"{questions['message']}",
                                               reply_markup=None)
             await state.set_state(Question.question)
     await callback.answer()
