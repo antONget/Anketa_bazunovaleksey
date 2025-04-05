@@ -1,24 +1,4 @@
 Traceback (most recent call last):
-  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/utils/error_handling.py", line 15, in wrapper
-    return await func(*args, **kwargs)
-  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/handlers/start_handlers.py", line 43, in process_press_start
-    await rq_user.add_user(data)
-  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/database/requests/rq_user.py", line 32, in add_user
-    new_user = User(**data)
-  File "<string>", line 4, in __init__
-  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/venv/lib/python3.10/site-packages/sqlalchemy/orm/state.py", line 571, in _initialize_instance
-    with util.safe_reraise():
-  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
-    raise exc_value.with_traceback(exc_tb)
-  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/venv/lib/python3.10/site-packages/sqlalchemy/orm/state.py", line 569, in _initialize_instance
-    manager.original_init(*mixed[1:], **kwargs)
-  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/venv/lib/python3.10/site-packages/sqlalchemy/orm/decl_base.py", line 2175, in _declarative_constructor
-    raise TypeError(
-TypeError: 'role' is an invalid keyword argument for User
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
   File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
     return await handler(event, data)
   File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
@@ -47,16 +27,6 @@ Traceback (most recent call last):
     return await wrapped_inner(event, kwargs)
   File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
     return await wrapped()
-  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/utils/error_handling.py", line 48, in wrapper
-    await bot.send_message(chat_id=config.tg_bot.support_id,
-  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 2825, in send_message
-    return await self(call, request_timeout=request_timeout)
-  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 453, in __call__
-    return await self.session(self, method, timeout=request_timeout)
-  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 254, in __call__
-    return cast(TelegramType, await middleware(bot, method))
-  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/venv/lib/python3.10/site-packages/aiogram/client/session/aiohttp.py", line 185, in make_request
-    response = self.check_response(
-  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 120, in check_response
-    raise TelegramBadRequest(method=method, message=description)
-aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: can't parse entities: Unsupported start tag "string" at byte offset 861
+  File "/Users/antonponomarev/PycharmProjects/Anketa_bazunovaleksey/handlers/anketa_handlers.py", line 192, in process_select_answer
+    multiselect.pop(answer)
+TypeError: 'str' object cannot be interpreted as an integer
