@@ -371,7 +371,7 @@ async def other_answer_callback(callback: CallbackQuery, state: FSMContext, bot:
     if count_question - 1 == 72 and \
             dict_questions[count_question - 1]['list_buttons'][int(callback.data.split('_')[-2])] == 'Да':
         await callback.message.edit_text(text='Способ восстановления кровотока по коронарным артериям',
-                                         reply_markup=keyboard_74(count_question=count_question))
+                                         reply_markup=keyboard_72(count_question=count_question))
         await state.update_data(other_answer=['Да'])
 
     if count_question - 1 == 74 and \
