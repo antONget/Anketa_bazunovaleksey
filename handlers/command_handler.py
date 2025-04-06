@@ -2,7 +2,7 @@ import logging
 
 from aiogram import F, Router, Bot
 from aiogram.types import Message
-from aiogram.filters import Command
+from aiogram.fsm.context import FSMContext
 
 
 from config_data.config import Config, load_config
@@ -12,7 +12,7 @@ config: Config = load_config()
 
 
 @router.message(F.text == 'Информация о регистре')
-async def command_help(message: Message, bot: Bot) -> None:
+async def command_help(message: Message, state: FSMContext, bot: Bot) -> None:
     """
     Помощь
     :param message:
@@ -20,6 +20,7 @@ async def command_help(message: Message, bot: Bot) -> None:
     :return:
     """
     logging.info('command_help')
+    await state.clear()
     await message.answer(text="""Вся информация внесенная в данный регистр является конфиденциальной и не предоставляется для ознакомления третьим лицам!
 
 Северо-западный TAVI регистр создан для мониторинга изменений в процедуре транскатетерной имплантации аортального клапана (TAVI)
@@ -32,7 +33,7 @@ async def command_help(message: Message, bot: Bot) -> None:
 
 
 @router.message(F.text == 'Контакты')
-async def command_support(message: Message, bot: Bot) -> None:
+async def command_support(message: Message, state: FSMContext, bot: Bot) -> None:
     """
     Поддержка
     :param message:
@@ -40,5 +41,6 @@ async def command_support(message: Message, bot: Bot) -> None:
     :return:
     """
     logging.info('command_support')
+    await state.clear()
     await message.answer(text=f'Почта tavireregistry@gmail.com\n'
                               f'Телефон +7(911)822-72-66')

@@ -36,8 +36,8 @@ async def main():
     await on_startup_notify(bot=bot)
     dp.include_router(error.router)
     dp.include_router(start_handlers.router)
-    dp.include_router(anketa_handlers.router)
     dp.include_router(command_handler.router)
+    dp.include_router(anketa_handlers.router)
     dp.include_router(other_handlers.router)
 
     # Пропускаем накопившиеся update и запускаем polling
