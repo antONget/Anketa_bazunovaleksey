@@ -78,7 +78,7 @@ async def get_answer_question(message: Message, state: FSMContext, bot: Bot) -> 
     data = await state.get_data()
     answer_list = data['answer']
     # вопросы требующие отдельной логики
-    if (len(answer_list) + 1) in [16, 25, 29, 39, 46, 53, 64, 75]:
+    if (len(answer_list) + 1) in [16, 25, 29, 39, 46, 53, 64, 72, 74]:
         answer_list.append([data['other_answer'], message.text])
     else:
         # заносим ответ в список без отдельной логики
