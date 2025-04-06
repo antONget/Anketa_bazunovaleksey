@@ -24,8 +24,12 @@ other_question = {
          "Boston Scientific": ['AСURATE neo',
                                'AСURATE neo2']
          },
-    75: {'Эндоваскулярно (ушивающие устройства)': ['PROSTAR',
-                                       '2x ProGlide',
-                                       'ProGlide и Angio-Seal']
+    72: {'Да': ['Реканализация, стентирование',
+                'Реканализация, баллонная ангиопластика',
+                'Коронарное шунтирование']
+         },
+    74: {'Эндоваскулярно (ушивающие устройства)': ['PROSTAR',
+                                                   '2x ProGlide',
+                                                   'ProGlide и Angio-Seal']
          }
 }

@@ -191,14 +191,34 @@ def keyboard_64_Boston_Scientific(count_question: int) -> InlineKeyboardMarkup:
     return keyboard
 
 
-def keyboard_75(count_question: int) -> InlineKeyboardMarkup:
+def keyboard_72(count_question: int) -> InlineKeyboardMarkup:
+    """
+      ['Реканализация, стентирование',
+                'Реканализация, баллонная ангиопластика',
+                'Коронарное шунтирование']
+    :return:
+    """
+    logging.info('keyboard_72')
+    button_1 = InlineKeyboardButton(text='Реканализация, стентирование',
+                                    callback_data=f'other_question_0_{count_question - 1}')
+    button_2 = InlineKeyboardButton(text='Реканализация, баллонная ангиопластика',
+                                    callback_data=f'other_question_1_{count_question - 1}')
+    button_3 = InlineKeyboardButton(text='Коронарное шунтирование',
+                                    callback_data=f'other_question_2_{count_question - 1}')
+    keyboard = InlineKeyboardMarkup(
+        inline_keyboard=[[button_1], [button_2], [button_3]],
+    )
+    return keyboard
+
+
+def keyboard_74(count_question: int) -> InlineKeyboardMarkup:
     """
       ['PROSTAR',
       '2x ProGlide',
       'ProGlide и Angio-Seal']
     :return:
     """
-    logging.info('keyboard_68_Boston_Scientific')
+    logging.info('keyboard_74')
     button_1 = InlineKeyboardButton(text='PROSTAR',
                                     callback_data=f'other_question_0_{count_question - 1}')
     button_2 = InlineKeyboardButton(text='2x ProGlide',

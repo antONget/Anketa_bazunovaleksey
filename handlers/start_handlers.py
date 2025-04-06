@@ -40,8 +40,7 @@ async def process_press_start(message: Message, state: FSMContext, command: Comm
     data = {"tg_id": tg_id, "username": username}
     await rq_user.add_user(data)
     await message.answer(text='Добро пожаловать в Telegram-бот регистра TAVI!\n\n'
-                              'С помощью этого бота вы сможете быстро и удобно заполнять регистрационную'
-                              ' форму для заполнения.',
+                              'С помощью этого бота вы сможете быстро и удобно заполнять регистрационную форму.',
                          reply_markup=keyboard_start())
 
 

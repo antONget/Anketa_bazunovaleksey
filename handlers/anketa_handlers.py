@@ -9,7 +9,7 @@ from config_data.config import Config, load_config
 from anketa_question.questions import dict_questions
 from anketa_question.other_question import other_question
 from keyboards.anketa_keyboard import keyboard_anketa, keyboard_39, keyboard_46, keyboard_53, keyboard_64_Medtronic, \
-    keyboard_64_Abbott, keyboard_64_Boston_Scientific, keyboard_75
+    keyboard_64_Abbott, keyboard_64_Boston_Scientific, keyboard_72, keyboard_74
 from utils.send_admins import send_text_admins
 from services.googlesheets import append_order
 from database.models import User
@@ -149,12 +149,12 @@ async def process_select_answer(callback: CallbackQuery, state: FSMContext, bot:
     logging.info('process_select_answer')
     print(callback.data)
     count_question = int(callback.data.split('_')[-1]) + 1
-    if (count_question - 1) in [16, 25, 29, 39, 46, 53, 64, 75] and \
+    if (count_question - 1) in [16, 25, 29, 39, 46, 53, 64, 72, 74] and \
             (callback.data.startswith('question') or callback.data.startswith('continue')):
         await state.update_data(count_question=count_question)
         if (count_question - 1 == 16 or count_question - 1 == 25 or count_question - 1 == 29 or
             count_question - 1 == 39 or count_question - 1 == 46 or count_question - 1 == 53 or
-            count_question - 1 == 75) \
+            count_question - 1 == 72 or count_question - 1 == 74) \
                 and (callback.data.split('_')[-2] == '1' or callback.data.split('_')[0] == 'continue'):
             pass
         elif count_question - 1 == 64 and callback.data.split('_')[-2] not in ['0', '1', '2']:
@@ -189,7 +189,7 @@ async def process_select_answer(callback: CallbackQuery, state: FSMContext, bot:
             print(other_answer_id, multiselect[0], count_question-1)
             answer = other_question[count_question-1][multiselect[0]][other_answer_id]
             if answer in multiselect:
-                multiselect.pop(answer)
+                multiselect.remove(answer)
             else:
                 multiselect.append(answer)
             if count_question-1 == 46:
@@ -283,7 +283,7 @@ async def process_select_answer(callback: CallbackQuery, state: FSMContext, bot:
     multiselect: list = data['multiselect']
     answer = dict_questions[count_question]["list_buttons"][select_answer_id]
     if answer in multiselect:
-        multiselect.pop(answer)
+        multiselect.remove(answer)
     else:
         multiselect.append(answer)
     questions = dict_questions[count_question]
@@ -368,10 +368,16 @@ async def other_answer_callback(callback: CallbackQuery, state: FSMContext, bot:
                                          reply_markup=keyboard_64_Boston_Scientific(count_question=count_question))
         await state.update_data(other_answer=['Boston Scientific'])
 
-    if count_question - 1 == 75 and \
+    if count_question - 1 == 72 and \
+            dict_questions[count_question - 1]['list_buttons'][int(callback.data.split('_')[-2])] == 'Да':
+        await callback.message.edit_text(text='Способ восстановления кровотока по коронарным артериям',
+                                         reply_markup=keyboard_74(count_question=count_question))
+        await state.update_data(other_answer=['Да'])
+
+    if count_question - 1 == 74 and \
             dict_questions[count_question - 1]['list_buttons'][int(callback.data.split('_')[-2])] == 'Эндоваскулярно (ушивающие устройства)':
         await callback.message.edit_text(text='Выбор ушивающих устройств',
-                                         reply_markup=keyboard_75(count_question=count_question))
+                                         reply_markup=keyboard_74(count_question=count_question))
         await state.update_data(other_answer=['Эндоваскулярно (ушивающие устройства)'])
 
 
