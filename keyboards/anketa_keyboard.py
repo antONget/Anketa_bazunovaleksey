@@ -205,8 +205,10 @@ def keyboard_72(count_question: int) -> InlineKeyboardMarkup:
                                     callback_data=f'other_question_1_{count_question - 1}')
     button_3 = InlineKeyboardButton(text='Коронарное шунтирование',
                                     callback_data=f'other_question_2_{count_question - 1}')
+    button_4 = InlineKeyboardButton(text='Неуспех',
+                                    callback_data=f'other_question_3_{count_question - 1}')
     keyboard = InlineKeyboardMarkup(
-        inline_keyboard=[[button_1], [button_2], [button_3]],
+        inline_keyboard=[[button_1], [button_2], [button_3], [button_4]],
     )
     return keyboard
 

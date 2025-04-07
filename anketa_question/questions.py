@@ -350,7 +350,7 @@ dict_questions = {
                          'Meril - Myval THV',
                          'Microport - VitaFlow',
                          'SMT - Hydra',
-                         'Venus Microport',
+                         'Venus',
                          'МедИнж']
     },
     65: {
